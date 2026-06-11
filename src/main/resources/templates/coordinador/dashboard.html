@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/coordinador-layout :: layout('Dashboard Coordinador', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 border-start border-success border-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-xs fw-bold text-success text-uppercase mb-1">Estudiantes en Facultad</div>
+                                <div class="h5 mb-0 fw-bold text-gray-800" th:text="${totalEstudiantes}">0</div>
+                            </div>
+                            <i class="bi bi-mortarboard fs-1 text-secondary opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-sm border-0 mt-2">
+            <div class="card-body">
+                <h5 class="card-title text-success">Bienvenido, Coordinador</h5>
+                <p class="card-text">Desde aquí puedes gestionar a los estudiantes de tu facultad, verificar sus requisitos de grado y subir los resultados oficiales de las pruebas Saber Pro y TYT emitidos por el ICFES.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

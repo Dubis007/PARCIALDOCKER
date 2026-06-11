@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/coordinador-layout :: layout('Gestión de Estudiantes', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div th:if="${param.exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> Estado de grado actualizado a APROBADO.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h6 class="m-0 fw-bold text-success">Listado de Estudiantes</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Documento</th>
+                                <th>Código</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Semestre</th>
+                                <th>Estado Grado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="est : ${estudiantes}">
+                                <td th:text="${est.documento}">123</td>
+                                <td th:text="${est.codigo}">001</td>
+                                <td th:text="${est.nombres + ' ' + est.apellidos}">Juan Pérez</td>
+                                <td th:text="${est.semestre}">10</td>
+                                <td>
+                                    <span th:if="${est.estadoGrado == 'PENDIENTE' || est.estadoGrado == null}" class="badge bg-warning text-dark">Pendiente</span>
+                                    <span th:if="${est.estadoGrado == 'APROBADO'}" class="badge bg-success">Aprobado</span>
+                                </td>
+                                <td>
+                                    <form th:if="${est.estadoGrado == 'PENDIENTE' || est.estadoGrado == null}" th:action="@{/coordinador/estudiantes/aprobar/{id}(id=${est.id})}" method="post" onsubmit="return confirm('¿Confirmas que este estudiante cumple los requisitos de grado?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-success"><i class="bi bi-check2-square me-1"></i>Aprobar</button>
+                                    </form>
+                                    <button th:if="${est.estadoGrado == 'APROBADO'}" class="btn btn-sm btn-success" disabled><i class="bi bi-check-all me-1"></i>Aprobado</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

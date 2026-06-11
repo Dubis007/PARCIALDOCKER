@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UTS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        :root { --uts-blue: #003E65; --uts-green: #A5C424; }
+        body { font-family: 'Montserrat', sans-serif; background: linear-gradient(135deg, #003E65 0%, #001f33 100%); height: 100vh; display: flex; align-items: center; }
+        .login-card { border-radius: 20px; border: none; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: hidden; }
+        .login-header { background-color: white; padding: 30px; text-align: center; border-bottom: 4px solid var(--uts-green); }
+        .login-body { background-color: #ffffff; padding: 40px; }
+        .form-control { border-radius: 8px; padding: 12px; border: 1px solid #e0e0e0; }
+        .form-control:focus { border-color: var(--uts-green); box-shadow: 0 0 0 0.25rem rgba(165,196,36,0.25); }
+        .btn-uts { background-color: var(--uts-green); color: white; border-radius: 8px; font-weight: 600; padding: 12px; width: 100%; border: none; transition: all 0.3s; }
+        .btn-uts:hover { background-color: #8da81d; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(165,196,36,0.4); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card login-card">
+                <div class="login-header">
+                    <i class="bi bi-mortarboard-fill text-uts-green" style="font-size: 3rem;"></i>
+                    <h4 class="fw-bold mt-2" style="color: var(--uts-blue);">Portal Institucional</h4>
+                    <p class="text-muted small mb-0">Pruebas TYT y Saber Pro</p>
+                </div>
+                <div class="login-body">
+                    <div th:if="${param.error}" class="alert alert-danger text-center rounded-3 shadow-sm border-0">
+                        <i class="bi bi-exclamation-circle me-1"></i> Credenciales incorrectas.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success text-center rounded-3 shadow-sm border-0">
+                        <i class="bi bi-check-circle me-1"></i> Sesión cerrada.
+                    </div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold text-secondary">Usuario</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                                <input type="text" class="form-control border-start-0 ps-0" name="username" required autofocus placeholder="Ej: est1">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-secondary">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" class="form-control border-start-0 ps-0" name="password" required placeholder="••••••••">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-uts">Ingresar al Sistema</button>
+                        <div class="text-center mt-4">
+                            <a th:href="@{/}" class="text-decoration-none text-muted small"><i class="bi bi-arrow-left me-1"></i> Volver al inicio</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/estudiante-layout :: layout('Mis Beneficios', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <!-- Mensaje si NO tiene beneficios -->
+        <div th:if="${#lists.isEmpty(beneficios)}">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h6 class="m-0 fw-bold text-primary">Beneficios Asignados</h6>
+                </div>
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-award text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-3">Aún no tienes beneficios asignados. Los beneficios se calculan automáticamente una vez se suben los resultados de las pruebas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjetas si SÍ tiene beneficios -->
+        <div th:if="${!#lists.isEmpty(beneficios)}">
+            <div class="alert alert-success shadow-sm border-0 mb-4">
+                <i class="bi bi-stars me-2"></i> ¡Felicidades! Tu esfuerzo académico ha sido recompensado.
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4" th:each="asignacion : ${beneficios}">
+                    <div class="card shadow-sm border-0 border-start border-warning border-4 h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title fw-bold text-dark mb-0" th:text="${asignacion.beneficio.nombre}">Nombre Beneficio</h5>
+                                <span class="badge bg-success" th:text="${asignacion.estado}">APROBADO</span>
+                            </div>
+                            <p class="card-text text-muted" th:text="${asignacion.beneficio.descripcion}">Descripción del beneficio.</p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar-check me-1"></i> Otorgado: <span th:text="${asignacion.fechaAsignacion}">2024-01-01</span>
+                                </small>
+                                <h4 class="mb-0 fw-bold text-warning">
+                                    <span th:text="${asignacion.beneficio.porcentajeDescuento}">100</span>% DCTO
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

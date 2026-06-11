@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/admin-layout :: layout('Gestión de Usuarios', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div th:if="${param.exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+            Estado del usuario actualizado correctamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h6 class="m-0 fw-bold text-primary">Listado General de Usuarios</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th class="text-end">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${usuarios}">
+                                <td th:text="${user.id}">1</td>
+                                <td class="fw-bold" th:text="${user.username}">admin</td>
+                                <td><span class="badge bg-secondary" th:text="${user.rol.nombre}">ROLE_ADMIN</span></td>
+                                <td>
+                                    <span th:if="${user.activo}" class="badge bg-success">Activo</span>
+                                    <span th:if="${!user.activo}" class="badge bg-danger">Inactivo</span>
+                                </td>
+                                <td class="text-end">
+                                    <form th:if="${user.username != 'admin'}" th:action="@{/admin/usuarios/toggle/{id}(id=${user.id})}" method="post">
+                                        <button type="submit" th:class="${user.activo ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success'}">
+                                            <i th:class="${user.activo ? 'bi bi-x-circle' : 'bi bi-check-circle'}"></i>
+                                            <span th:text="${user.activo ? 'Desactivar' : 'Activar'}"></span>
+                                        </button>
+                                    </form>
+                                    <span th:if="${user.username == 'admin'}" class="text-muted small">No modificable</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

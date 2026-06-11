@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/admin-layout :: layout('Dashboard Principal', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div class="row">
+            <!-- Tarjeta Usuarios -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 border-start border-primary border-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-xs fw-bold text-primary text-uppercase mb-1">Total Usuarios</div>
+                                <div class="h5 mb-0 fw-bold text-gray-800" th:text="${totalUsuarios}">0</div>
+                            </div>
+                            <i class="bi bi-people fs-1 text-secondary opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Facultades -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 border-start border-success border-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-xs fw-bold text-success text-uppercase mb-1">Facultades Registradas</div>
+                                <div class="h5 mb-0 fw-bold text-gray-800" th:text="${totalFacultades}">0</div>
+                            </div>
+                            <i class="bi bi-building fs-1 text-secondary opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Estudiantes -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 border-start border-info border-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-xs fw-bold text-info text-uppercase mb-1">Estudiantes Activos</div>
+                                <div class="h5 mb-0 fw-bold text-gray-800" th:text="${totalEstudiantes}">0</div>
+                            </div>
+                            <i class="bi bi-mortarboard fs-1 text-secondary opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-header bg-white py-3">
+                <h6 class="m-0 fw-bold text-primary">Bienvenido al Sistema</h6>
+            </div>
+            <div class="card-body">
+                <p>Desde este panel puedes gestionar la configuración global del sistema de Pruebas TYT y Saber Pro. Utiliza el menú lateral para navegar entre los diferentes módulos.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

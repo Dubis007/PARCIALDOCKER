@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Servicio de Base de Datos (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: tyt_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: pruebas_tyt
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      # Mapeamos al puerto 3307 para que no haga conflicto con tu XAMPP (3306)
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Servicio de la Aplicación Spring Boot
+  app:
+    build: .
+    container_name: tyt_app
+    restart: always
+    ports:
+      - "8083:8083"
+    depends_on:
+      - db
+    environment:
+      # Sobrescribimos las variables de application.properties para que apunte al contenedor 'db'
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/pruebas_tyt?useSSL=false&serverTimezone=America/Bogota&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+volumes:
+  db_data:

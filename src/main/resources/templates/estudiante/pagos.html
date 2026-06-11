@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/estudiante-layout :: layout('Derechos de Grado', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div th:if="${param.exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> Comprobante de pago subido correctamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> Error: Por favor asegúrate de subir un archivo en formato PDF.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="m-0 fw-bold text-primary">Subir Comprobante de Pago</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Sube el recibo de pago de tus derechos de grado en formato PDF. Si obtuviste un beneficio, asegúrate de haber pagado el valor con el descuento aplicado.</p>
+                        
+                        <form th:action="@{/estudiante/pagos/subir-comprobante}" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="archivoPdf" class="form-label fw-bold">Archivo PDF</label>
+                                <input class="form-control" type="file" id="archivoPdf" name="archivoPdf" accept=".pdf" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-cloud-upload me-2"></i> Subir Comprobante
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

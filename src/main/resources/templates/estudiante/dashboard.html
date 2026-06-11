@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/estudiante-layout :: layout('Mi Perfil', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="m-0 fw-bold text-primary">Información Académica</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Nombres y Apellidos:</div>
+                            <div class="col-sm-8 fw-bold" th:text="${estudiante.nombres + ' ' + estudiante.apellidos}">Nombre</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Documento de Identidad:</div>
+                            <div class="col-sm-8 fw-bold" th:text="${estudiante.documento}">123</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Código Estudiantil:</div>
+                            <div class="col-sm-8 fw-bold" th:text="${estudiante.codigo}">001</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Facultad:</div>
+                            <div class="col-sm-8 fw-bold" th:text="${estudiante.facultad.nombre}">Facultad</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 text-muted">Semestre Actual:</div>
+                            <div class="col-sm-8 fw-bold" th:text="${estudiante.semestre}">10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/coordinador-layout :: layout('Importar Resultados ICFES', ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <section>
+        <!-- Alertas actualizadas -->
+        <div th:if="${param.exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> ¡Importación exitosa! Los resultados han sido procesados y guardados en la base de datos.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> Error al procesar el archivo. Verifica que sea un Excel válido y tenga el formato correcto.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="m-0 fw-bold text-success">Subir Archivo Excel (.xlsx)</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-muted mb-4">Sube el archivo oficial "INFORME SABER PRO.xlsx" para actualizar los puntajes de los estudiantes y calcular sus beneficios automáticamente.</p>
+                        
+                        <form th:action="@{/coordinador/importar}" method="post" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label for="archivoExcel" class="form-label fw-bold">Seleccionar Archivo</label>
+                                <input class="form-control form-control-lg" type="file" id="archivoExcel" name="archivoExcel" accept=".xlsx, .xls" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-cloud-upload me-2"></i> Procesar Resultados
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
